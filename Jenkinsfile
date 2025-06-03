@@ -50,7 +50,7 @@ pipeline {
         stage('Sanity Testing') {
             steps {
                 script {
-                    ./test.py
+                    sh './test.py'
                     // gv.test_sanity(env.TEST_AMD64)
                     // gv.test_sanity(env.TEST_BOOT)
                     // gv.test_sanity(env.TEST_DEVICE)
