@@ -50,6 +50,7 @@ pipeline {
         stage('Sanity Testing') {
             steps {
                 script {
+                    sh 'chmod +x test.py'
                     sh './test.py'
                     // gv.test_sanity(env.TEST_AMD64)
                     // gv.test_sanity(env.TEST_BOOT)
