@@ -1,0 +1,149 @@
+{
+  "name": "Trigger Jenkins Job",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "url": "http://192.168.0.117:8080/crumbIssuer/api/json",
+        "options": {
+          "fullResponse": true
+        }
+      },
+      "id": "083d1de3-1f6c-4259-a01a-6429e3db31bc",
+      "name": "Get Crumb + Cookie",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        200,
+        0
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "xX5FDwqMe5NlOwQe",
+          "name": "Jenkins Basic Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "crumb",
+              "value": "={{$json.body.crumb}}"
+            },
+            {
+              "name": "crumbRequestField",
+              "value": "={{$json.body.crumbRequestField}}"
+            },
+            {
+              "name": "jsessionid",
+              "value": "={{$json.headers['set-cookie'][0].split(';')[0].split('=')[1]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f9d4510c-7219-4848-857a-f4fa27815bdb",
+      "name": "Set Crumb + Cookie Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        400,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "requestMethod": "POST",
+        "url": "http://192.168.0.117:8080/job/AutoRAID_Development/build?token=mytoken123",
+        "options": {},
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "={{$node[\"Set Crumb + Cookie Data\"].json[\"crumbRequestField\"]}}",
+              "value": "={{$node[\"Set Crumb + Cookie Data\"].json[\"crumb\"]}}"
+            },
+            {
+              "name": "=Cookie",
+              "value": "={{$node[\"Get Crumb + Cookie\"].json.headers['set-cookie'][0].split(';')[0]}}"
+            }
+          ]
+        }
+      },
+      "id": "08e155fc-7beb-40b0-8136-828eeb169eeb",
+      "name": "Trigger Jenkins Job",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        600,
+        0
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "xX5FDwqMe5NlOwQe",
+          "name": "Jenkins Basic Auth"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "635567ee-d01d-4c4d-8dd2-2ff8660d9643",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get Crumb + Cookie": {
+      "main": [
+        [
+          {
+            "node": "Set Crumb + Cookie Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Crumb + Cookie Data": {
+      "main": [
+        [
+          {
+            "node": "Trigger Jenkins Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get Crumb + Cookie",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fbb31247-f2e7-41b8-a4c9-b99f7449de98",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9f9cec9329f0c679cf1690a1d8298b452446985d18d209476040af9f8410d212"
+  },
+  "id": "LUHFWImT5r3tCYA1",
+  "tags": []
+}
