@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     sh 'chmod +x test.py'
-                    sh './test.py'
+                    sh 'pipenv run python3 -m pytest'
                     // gv.test_sanity(env.TEST_AMD64)
                     // gv.test_sanity(env.TEST_BOOT)
                     // gv.test_sanity(env.TEST_DEVICE)
