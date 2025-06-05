@@ -1,5 +1,5 @@
 import pytest
-from list_pcie_devices import get_pcie_devices
+from list_pcie_devices import list_pcie_devices
 
 
 def test_get_pcie_devices():
@@ -9,7 +9,7 @@ def test_get_pcie_devices():
     with the expected format and content.
     """
     # Call the function to get the list of PCIe devices
-    devices = get_pcie_devices()
+    devices = list_pcie_devices()
     
     # Validate that the response is a list
     assert isinstance(devices, list), "Expected a list of devices"
