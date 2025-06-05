@@ -8,7 +8,7 @@ def safe_sh(String command) {
 }
 
 def build_app() {
-    safe_sh 'pipenv sync'
+    safe_sh 'pipenv sync --dev'
 }
 
 def run_test(String path, String key = '', String additional_args = '') {
