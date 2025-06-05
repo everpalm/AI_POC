@@ -52,6 +52,7 @@ pipeline {
                 script {
                     sh 'cat Pipfile'
                     sh 'chmod +x test_*.py'
+                    sh 'pipenv lock'
                     sh 'pipenv run pip list'
                     sh 'pipenv run python3 -m pytest'
                     // gv.test_sanity(env.TEST_AMD64)
