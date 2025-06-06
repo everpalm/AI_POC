@@ -63,7 +63,7 @@ pipeline {
                     // sh 'chmod +x test_*.py'
                     sh 'pipenv lock'
                     sh 'pipenv run pip list'
-                    sh 'pipenv run python3 -m pytest'
+                    sh 'pipenv run python3 -m pytest -s'
                     // gv.test_sanity(env.TEST_AMD64)
                     // gv.test_sanity(env.TEST_BOOT)
                     // gv.test_sanity(env.TEST_DEVICE)
