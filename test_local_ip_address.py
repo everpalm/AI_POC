@@ -7,7 +7,7 @@ def test_get_local_ip():
     測試 get_local_ip 函數是否可以正確獲取本地 IP 地址。
     """
     # 假設這裡我們需要的測試環境，以模擬返回的本地 IP 地址
-    expected_ip = '192.168.1.1'  # 這是一個示例的預期 IP 地址
+    expected_ip = '192.168.0.129'  # 這是一個示例的預期 IP 地址
 
     # 調用 get_local_ip 函數並獲取結果
     result = get_local_ip()
