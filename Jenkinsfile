@@ -61,7 +61,7 @@ pipeline {
                         echo "None test_*.py file, no need to chmod"
                         fi
                     '''
-                    sh 'chmod +x test_*.py'
+                    // sh 'chmod +x test_*.py'
                     sh 'pipenv lock'
                     sh 'pipenv run pip list'
                     sh 'pipenv run python3 -m pytest'
