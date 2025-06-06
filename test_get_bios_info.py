@@ -1,5 +1,5 @@
 import pytest
-from get_bios_info import get_bios_info  # 匯入需測試的函數
+from get_bios_info import get_bios_version  # 匯入需測試的函數
 
 
 def test_get_bios_info():
@@ -8,13 +8,13 @@ def test_get_bios_info():
     確保這個單元測試能檢查函數是否正確返回 BIOS 信息。
     """
     # 假設的預期結果，應根據實際的 get_bios_info 函數輸出進行修改
-    expected_result = {"version": "1.0.0", "manufacturer": "Example Corp"}
+    expected_result = "2206"
 
     # 呼叫 get_bios_info 函數以獲取當前 BIOS 信息
-    result = get_bios_info()
+    result = get_bios_version()
 
     # 驗證結果是否與預期相符
-    assert result == expected_result, f"預期: {expected_result}, 實際: {result}" 
+    assert result == expected_result, f"預期: expected_result" 
 
 
 if __name__ == "__main__":
