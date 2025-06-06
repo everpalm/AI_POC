@@ -1,5 +1,5 @@
 import pytest
-from get_cpu_info import get_cpu_info  # 引入待測試的CPU資訊獲取函數
+from get_cpu_info import get_cpu_model  # 引入待測試的CPU資訊獲取函數
 
 
 def test_get_cpu_info():
@@ -8,7 +8,7 @@ def test_get_cpu_info():
     包含對返回資料格式及內容的檢查。
     """
     # 調用 get_cpu_info 函數以獲取 CPU 信息
-    cpu_info = get_cpu_info()  
+    cpu_info = get_cpu_model()  
     
     # 驗證 cpu_info 是否為字典格式
     assert isinstance(cpu_info, str), "CPU info is a string"
