@@ -51,6 +51,16 @@ pipeline {
             steps {
                 script {
                     sh 'cat Pipfile'
+                    sh 'echo "==> check if prefix test exsits"; ls -al .'
+                    // 如果有 test_*.py，就加执行权限；否则打印提示但不报错
+                    sh '''
+                        if ls test_*.py 1> /dev/null 2>&1; then
+                        chmod +x test_*.py
+                        echo "shed execution to test_*.py "
+                        else
+                        echo "None test_*.py file, no need to chmod"
+                        fi
+                    '''
                     sh 'chmod +x test_*.py'
                     sh 'pipenv lock'
                     sh 'pipenv run pip list'
